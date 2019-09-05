@@ -42,7 +42,7 @@ const restricAccess = (req, res, next) => {
 app.get("/login", (req, res) => {
     // res.locals.error = req.flash('error');
     // res.render(__dirname + '/views/login.pug')
-    res.sendFile(__dirname + '/login.html')
+    res.sendFile(path.join(__dirname , "login.html"))
   });
 // const isLogedIn = (req, res, next) => {
 //   if (req.isAuthenticated()) return res.redirect("/");
@@ -59,7 +59,7 @@ if (dev) {
 } else {
   app.use(express.static(path.join(__dirname , "build")));
   app.get("/", restricAccess, (req, res) => {
-    res.sendFile(path.join(__dirname , "build/index.html"));
+    res.sendFile(path.join(__dirname , "build","index.html"));
   });
 }
 app.get("/api/getuserinfos", restricAccess, (req, res) => {
