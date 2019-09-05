@@ -42,7 +42,7 @@ const restricAccess = (req, res, next) => {
 app.get("/login", (req, res) => {
     // res.locals.error = req.flash('error');
     // res.render(__dirname + '/views/login.pug')
-    res.sendFile("index.html")
+    res.sendFile(path.join(__dirname , "index.html"))
   });
 // const isLogedIn = (req, res, next) => {
 //   if (req.isAuthenticated()) return res.redirect("/");
