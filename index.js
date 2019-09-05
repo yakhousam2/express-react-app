@@ -3,7 +3,7 @@ const path = require('path')
 const passport = require('passport');
 const session = require('express-session')
 // const MongoDBStore = require('connect-mongodb-session')(session);
-const flash = require('connect-flash')
+// const flash = require('connect-flash')
 
 const auth = require('./auth')
 
@@ -27,7 +27,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
-app.use(flash())
+// app.use(flash())
 
 const dev = process.env.NODE_ENV !== "production";
 const PORT = process.env.PORT || 3001;
@@ -73,7 +73,7 @@ app.post("/login",
   passport.authenticate('local', {
     failureRedirect: '/login',
     successRedirect: '/',
-    failureFlash: true
+    // failureFlash: true
   })
 );
 app.get('/logout', (req, res) => {
