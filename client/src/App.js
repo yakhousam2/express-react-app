@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+  const [username, setUsername] = useState();
+  useEffect(() => {
+    const getUserInfos = async () => {
+      try {
+        const res = await fetch("api/getuserinfos");
+        // console.log('respond =', res)
+        const json = await res.json();
+        if (json.username) {
+          setUsername(json.username);
+        }
+      } catch (error) {
+        setUsername("not connected");
+        console.error(error);
+      }
+    };
+    getUserInfos();
+  },[]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>this is a react page</h1>
+      <h2>{username}</h2>
+      {username && username !=="not connected" && <a href="/logout">logout</a> /* this work only in production */} 
     </div>
   );
 }

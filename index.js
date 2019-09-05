@@ -53,8 +53,7 @@ if (dev) {
 } else {
   app.use(express.static(path.join(__dirname , "../build")));
   app.get("/", restricAccess, (req, res) => {
-    // res.sendFile(path.join(__dirname , "../build/index.html"));
-    res.end("<html><body><h1>this is an express server</h1><a href='/logout'>Logout</a></body></html>");
+    res.sendFile(path.join(__dirname , "/client/index.html"));
   });
 }
 app.get("/api/getuserinfos", restricAccess, (req, res) => {
