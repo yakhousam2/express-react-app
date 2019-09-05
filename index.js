@@ -57,9 +57,9 @@ if (dev) {
    
   });
 } else {
-  app.use(express.static(path.join(__dirname , "client/build")));
+  app.use(express.static(path.join(__dirname , "client", "build")));
   app.get("/", restricAccess, (req, res) => {
-    res.sendFile(path.join(__dirname , "client/build","index.html"));
+    res.sendFile(path.join(__dirname , "client", "build","index.html"));
   });
 }
 app.get("/api/getuserinfos", restricAccess, (req, res) => {
