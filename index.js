@@ -35,25 +35,25 @@ const PORT = process.env.PORT || 3001;
 app.set('view engine', 'pug');
 
 const restricAccess = (req, res, next) => {
-  if (!req.isAuthenticated()) return res.redirect("/");
+  if (!req.isAuthenticated()) return res.redirect("/login");
   next();
 };
 const isLogedIn = (req, res, next) => {
-  if (req.isAuthenticated()) return res.redirect("/myapp");
+  if (req.isAuthenticated()) return res.redirect("/");
   next();
 };
 
 if (dev) {
   const cors = require("cors");
   app.use(cors());
-  app.get("/myapp", restricAccess, (req, res) => {
+  app.get("/", restricAccess, (req, res) => {
     res.end("<html><body><h1>this is an express server</h1><a href='/logout'>Logout</a></body></html>");
    
   });
 } else {
-  app.use(express.static(path.join(__dirname , "/client/build/")));
-  app.get("/myapp", restricAccess, (req, res) => {
-    res.sendFile(path.join(__dirname , "/client/build/index.html"));
+  app.use(express.static(path.join(__dirname , "build")));
+  app.get("/", restricAccess, (req, res) => {
+    res.sendFile(path.join(__dirname , "build/index.html"));
   });
 }
 app.get("/api/getuserinfos", restricAccess, (req, res) => {
@@ -61,14 +61,14 @@ app.get("/api/getuserinfos", restricAccess, (req, res) => {
   res.json({ username: req.user.username });
 });
 
-app.get("/", isLogedIn, (req, res) => {
+app.get("/login", isLogedIn, (req, res) => {
   res.locals.error = req.flash('error');
   res.render(__dirname + '/views/login.pug')
 });
 app.post("/login",
   passport.authenticate('local', {
-    failureRedirect: '/',
-    successRedirect: '/myapp',
+    failureRedirect: '/login',
+    successRedirect: '/',
     failureFlash: true
   })
 );
