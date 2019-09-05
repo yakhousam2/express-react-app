@@ -39,6 +39,10 @@ const restricAccess = (req, res, next) => {
   if (!req.isAuthenticated()) return res.redirect("/login");
   next();
 };
+app.get("/login", (req, res) => {
+    res.locals.error = req.flash('error');
+    res.render(__dirname + '/views/login.pug')
+  });
 // const isLogedIn = (req, res, next) => {
 //   if (req.isAuthenticated()) return res.redirect("/");
 //   next();
@@ -62,10 +66,7 @@ app.get("/api/getuserinfos", restricAccess, (req, res) => {
   res.json({ username: req.user.username });
 });
 
-app.get("/login", (req, res) => {
-  res.locals.error = req.flash('error');
-  res.render(__dirname + '/views/login.pug')
-});
+
 app.post("/login",
   passport.authenticate('local', {
     failureRedirect: '/login',
