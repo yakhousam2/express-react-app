@@ -8,3 +8,6 @@ npm start<br />
 server http://localhost:3001<br />
 client http://localhost:3000 <br />
 heroku https://yakhousam-express-react.herokuapp.com/
+## issue
+it should redirect to the login page when you load the website <br />
+https://yakhousam-express-react.herokuapp.com/login
