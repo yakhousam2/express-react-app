@@ -35,6 +35,7 @@ const PORT = process.env.PORT || 3001;
 app.set('view engine', 'pug');
 
 const restricAccess = (req, res, next) => {
+    console.log('islogin = ', req.isAuthenticated())
   if (!req.isAuthenticated()) return res.redirect("/login");
   next();
 };
