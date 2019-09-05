@@ -38,10 +38,10 @@ const restricAccess = (req, res, next) => {
   if (!req.isAuthenticated()) return res.redirect("/login");
   next();
 };
-const isLogedIn = (req, res, next) => {
-  if (req.isAuthenticated()) return res.redirect("/");
-  next();
-};
+// const isLogedIn = (req, res, next) => {
+//   if (req.isAuthenticated()) return res.redirect("/");
+//   next();
+// };
 
 if (dev) {
   const cors = require("cors");
@@ -61,7 +61,7 @@ app.get("/api/getuserinfos", restricAccess, (req, res) => {
   res.json({ username: req.user.username });
 });
 
-app.get("/login", isLogedIn, (req, res) => {
+app.get("/login", (req, res) => {
   res.locals.error = req.flash('error');
   res.render(__dirname + '/views/login.pug')
 });
