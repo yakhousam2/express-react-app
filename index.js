@@ -74,7 +74,7 @@ app.post("/login",
 );
 app.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 app.listen(PORT, () => {
