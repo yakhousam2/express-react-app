@@ -57,7 +57,7 @@ if (dev) {
   });
 } else {
   app.get("/", restricAccess, (req, res) => {
-    res.sendFile(path.join(__dirname , "client/build","app.html"));
+    res.sendFile(path.join(__dirname , "client/build","index.html"));
   });
 }
 app.get("/api/getuserinfos", restricAccess, (req, res) => {
