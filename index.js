@@ -32,7 +32,7 @@ app.use(flash())
 const dev = process.env.NODE_ENV !== "production";
 const PORT = process.env.PORT || 3001;
 
-app.set('view engine', 'pug');
+// app.set('view engine', 'pug');
 
 const restricAccess = (req, res, next) => {
     console.log('islogin = ', req.isAuthenticated())
@@ -40,8 +40,9 @@ const restricAccess = (req, res, next) => {
   next();
 };
 app.get("/login", (req, res) => {
-    res.locals.error = req.flash('error');
-    res.render(__dirname + '/views/login.pug')
+    // res.locals.error = req.flash('error');
+    // res.render(__dirname + '/views/login.pug')
+    res.sendFile(__dirname + '/login.html')
   });
 // const isLogedIn = (req, res, next) => {
 //   if (req.isAuthenticated()) return res.redirect("/");
